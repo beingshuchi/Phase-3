@@ -2,29 +2,30 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>WalletApp</groupId>
-  <artifactId>152919_Phase2</artifactId>
+  <groupId>spring</groupId>
+  <artifactId>GameScheduleApplnWithJpa</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>152919_Phase2</name>
+  <name>GameScheduleApplnWithJpa</name>
   <url>http://maven.apache.org</url>
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/junit/junit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+ 
+  
 <dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>4.6</version>
-    <scope>test</scope>
-</dependency>
-
-  <dependency>
 <groupId>org.hibernate.javax.persistence</groupId>
 <artifactId>hibernate-jpa-2.1-api</artifactId>
 <version>1.0.0.Final</version>
@@ -55,5 +56,5 @@
     <artifactId>spring-context</artifactId>
     <version>5.0.6.RELEASE</version>
 </dependency>
-  </dependencies>
+</dependencies>
 </project>
