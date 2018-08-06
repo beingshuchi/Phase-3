@@ -1,15 +1,15 @@
 package com.cg.bean;
 
-import javax.persistence.*;
-import java.util.List;
-import java.util.Date;
 import java.math.BigDecimal;
-/**
- * @author SHUCHITA
- *
- */
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 @Entity
-public class Transactions {
+public class Transaction {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
@@ -60,9 +60,9 @@ public class Transactions {
 	public String toString() {
 		return "Transactions [id=" + id + ", wallet=" + wallet+ ", transactionType=" + transactionType + ", amtType=" + amtType +" ,amount="+amt +
 
-				" ,date=" + date + "]";
+				" ,date=" + date  + "]";
 	}
-	public Transactions() {
+	public Transaction() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
