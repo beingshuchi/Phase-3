@@ -14,11 +14,12 @@ public class Transactions {
 	private int id;
 	@ManyToOne
 	private Wallet wallet;
-	@OneToOne
-	private Deposit deposit;
-	@OneToOne
-	private Withdraw withdraw;
-	
+	private String transactionType;
+	private BigDecimal amt;
+	private String amtType;
+		public int getId() {
+		return id;
+	}
 	
 	public Wallet getWallet() {
 		return wallet;
@@ -26,30 +27,33 @@ public class Transactions {
 	public void setWallet(Wallet wallet) {
 		this.wallet = wallet;
 	}
-	public Deposit getDeposit() {
-		return deposit;
+	public String getTransactionType() {
+		return transactionType;
 	}
-	public void setDeposit(Deposit deposit) {
-		this.deposit = deposit;
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+	public BigDecimal getAmt() {
+		return amt;
+	}
+	public void setAmt(BigDecimal amt) {
+		this.amt = amt;
+	}
+	public String getAmtType() {
+		return amtType;
+	}
+	public void setAmtType(String amtType) {
+		this.amtType = amtType;
 	}
 	
 	
-	public int getId() {
-		return id;
-	}
 	
-	
-	public Withdraw getWithdraw() {
-		return withdraw;
-	}
-	public void setWithdraw(Withdraw withdraw) {
-		this.withdraw = withdraw;
-	}
 	
 	
 	@Override
 	public String toString() {
-		return "Transactions [id=" + id + ", wallet=" + wallet + ", deposit=" + deposit + ", withdraw=" + withdraw
+		return "Transactions [id=" + id + ", wallet=" + wallet+ ", transactionType=" + transactionType + ", amtType=" + amtType +"amount="+amt +"]";
+
 				+ "]";
 	}
 	public Transactions() {
@@ -58,5 +62,6 @@ public class Transactions {
 	}
 	
 	
+
 	
 }
