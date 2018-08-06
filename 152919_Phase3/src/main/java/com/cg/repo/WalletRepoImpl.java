@@ -2,11 +2,8 @@ package com.cg.repo;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-
 import com.cg.bean.Customer;
 import com.cg.bean.Deposit;
 import com.cg.bean.Wallet;
@@ -29,7 +26,7 @@ public class WalletRepoImpl implements IWalletRepo{
 		// TODO Auto-generated method stub
 		EntityManager em= DBUtil.getConnection();
 		
-		Customer cust=em.find(mobile);
+		Customer cust=em.find(Customer.class,mobile);
 		
 		if(cust!=null) {
 			return cust;
@@ -44,13 +41,16 @@ public class WalletRepoImpl implements IWalletRepo{
 	@Override
 	public boolean createAccount(Customer customer) throws WalletException {
 		// TODO Auto-generated method stub
-		Deposit dep= new Deposit();
-		dep.setCredit(customer.getWallet().getBalance());
-		dep.setDate(Date.valueOf(LocalDate.now()));
+		Transactions trans= new Transactions();
+		trans.setAmt(customer.getWallet().getBalance());
+		trans.setAmtType("credit");
+		trans.setTransactionType("deposit");
+		trans.setWallet(customer.getWallet());
+		    trans.setDate(Date.valueOf(LocalDate.now()));
 			EntityManager em= DBUtil.getConnection();
 			em.getTransaction().begin();
 			em.persist(customer);
-			em.persist(dep);
+			em.persist(trans);
 			em.getTransaction().commit();
 			return true;
 			
