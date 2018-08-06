@@ -2,7 +2,8 @@ package com.cg.bean;
 
 import javax.persistence.*;
 import java.util.List;
-
+import java.util.Date;
+import java.math.BigDecimal;
 /**
  * @author SHUCHITA
  *
@@ -17,6 +18,7 @@ public class Transactions {
 	private String transactionType;
 	private BigDecimal amt;
 	private String amtType;
+	private Date date;
 		public int getId() {
 		return id;
 	}
@@ -45,16 +47,20 @@ public class Transactions {
 	public void setAmtType(String amtType) {
 		this.amtType = amtType;
 	}
-	
-	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	
 	
 	
 	@Override
 	public String toString() {
-		return "Transactions [id=" + id + ", wallet=" + wallet+ ", transactionType=" + transactionType + ", amtType=" + amtType +"amount="+amt +"]";
+		return "Transactions [id=" + id + ", wallet=" + wallet+ ", transactionType=" + transactionType + ", amtType=" + amtType +" ,amount="+amt +
 
-				+ "]";
+				" ,date=" + date + + "]";
 	}
 	public Transactions() {
 		super();
