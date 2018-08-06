@@ -60,7 +60,7 @@ public class Transactions {
 	public String toString() {
 		return "Transactions [id=" + id + ", wallet=" + wallet+ ", transactionType=" + transactionType + ", amtType=" + amtType +" ,amount="+amt +
 
-				" ,date=" + date + + "]";
+				" ,date=" + date + "]";
 	}
 	public Transactions() {
 		super();
