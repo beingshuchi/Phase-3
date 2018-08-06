@@ -1,22 +1,21 @@
 package com.cg.repo;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
+
+import javax.persistence.EntityManager;
 import com.cg.bean.Customer;
-import com.cg.bean.Deposit;
-import com.cg.bean.Wallet;
+import com.cg.bean.Transaction;
 import com.cg.exception.WalletException;
 import com.cg.util.DBUtil;
 
-public class WalletRepoImpl implements IWalletRepo{
-	
+public class WalletRepoImpl implements IWalletRepo {
+
 	@Override
 	public boolean save(Customer customer) throws WalletException {
 		EntityManager em= DBUtil.getConnection();
 		em.getTransaction().begin();
-		em.persist(customer);
+		em.merge(customer);
 		em.getTransaction().commit();
 		return true;
 	}
@@ -41,7 +40,7 @@ public class WalletRepoImpl implements IWalletRepo{
 	@Override
 	public boolean createAccount(Customer customer) throws WalletException {
 		// TODO Auto-generated method stub
-		Transactions trans= new Transactions();
+		Transaction trans= new Transaction();
 		trans.setAmt(customer.getWallet().getBalance());
 		trans.setAmtType("credit");
 		trans.setTransactionType("deposit");
@@ -63,4 +62,5 @@ public class WalletRepoImpl implements IWalletRepo{
 
 	
 
+	
 }
