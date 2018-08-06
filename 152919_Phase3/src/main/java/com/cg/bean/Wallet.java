@@ -2,15 +2,17 @@ package com.cg.bean;
 
 import java.math.BigDecimal;
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 @Entity
 public class Wallet {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	int id;
-	private BigDecimal balance;
-	@OneToMany(mappedBy="wallet")
-	List<Transactions>transaction;
+	BigDecimal balance;
+	@OneToMany(mappedBy="wallet",cascade=CascadeType.ALL)
+	List<Transaction> transaction;
 	public BigDecimal getBalance() {
 		return balance;
 	}
@@ -24,21 +26,23 @@ public class Wallet {
 		return "Wallet [balance=" + balance + "]";
 	}
 
-	public List<Transactions> getTransaction() {
+	public Wallet(BigDecimal balance) {
+		super();
+		this.balance = balance;
+	}
+
+	public Wallet() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public List<Transaction> getTransaction() {
 		return transaction;
 	}
 
-	public void setTransaction(List<Transactions> transaction) {
+	public void setTransaction(List<Transaction> transaction) {
 		this.transaction = transaction;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 	
 	
 	
