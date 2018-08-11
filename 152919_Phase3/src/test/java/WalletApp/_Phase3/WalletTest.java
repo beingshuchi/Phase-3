@@ -23,54 +23,54 @@ public class WalletTest {
 		service = new WalletServiceImpl();
 	}
 	
-	@Test
-	public void checkMobileNoCreateAccount() {
+	@Test(expected=WalletException.class)
+	public void checkMobileNoCreateAccount() throws WalletException {
 		Customer cust = new Customer();
 		cust.setMobileNo("900400");
 		cust.setName("shalini");
 		Wallet wallet= new Wallet();
 		wallet.setBalance(new BigDecimal(444));
 		cust.setWallet(wallet);
-		try {
-			service.createAccount(cust);
-		} catch (WalletException e) {
+		//try {
+			assertNotNull(service.createAccount(cust));
+		//} catch (WalletException e) {
 			// TODO Auto-generated catch block
-			assertEquals("The mobile number must contain only 10 digits", e.getMessage());
-		}
+			//assertEquals("The mobile number must contain only 10 digits", e.getMessage());
+		//}
 	}
-	@Test
-	public void checkMobileNoEmptyCreateAccount() {
+	@Test(expected=WalletException.class)
+	public void checkMobileNoEmptyCreateAccount() throws WalletException {
 		Customer cust = new Customer();
 		cust.setMobileNo("");
 		cust.setName("shalini");
 		Wallet wallet= new Wallet();
 		wallet.setBalance(new BigDecimal(454));
 		cust.setWallet(wallet);
-		try {
-			service.createAccount(cust);
-		} catch (WalletException e) {
+		//try {
+			assertNotNull(service.createAccount(cust));
+		//} catch (WalletException e) {
 			// TODO Auto-generated catch block
-			assertEquals("The mobile number cannot be left empty.", e.getMessage());
-		}
+		//	assertEquals("The mobile number cannot be left empty.", e.getMessage());
+		//}
 	}
-	 @Test
-	 public void checkNameEmptyCreateAccount() {
+	@Test(expected=WalletException.class)
+	 public void checkNameEmptyCreateAccount() throws WalletException {
 			Customer cust = new Customer();
 			cust.setMobileNo("9004009009");
 			cust.setName("");
 			Wallet wallet= new Wallet();
 			wallet.setBalance(new BigDecimal(3434.34));
 			cust.setWallet(wallet);
-			try {
-				service.createAccount(cust);
-			} catch (WalletException e) {
+			//try {
+				assertNotNull(service.createAccount(cust));
+			//} catch (WalletException e) {
 				// TODO Auto-generated catch block
-				assertEquals("The name cannot be left empty.", e.getMessage());
-			}
+				//assertEquals("The name cannot be left empty.", e.getMessage());
+			//}
 		 
 	 }
 	 
-	 @Test
+	@Test
 	 public void checkNameCreateAccount() {
 			Customer cust = new Customer();
 			cust.setMobileNo("9004009009");
@@ -79,7 +79,7 @@ public class WalletTest {
 			wallet.setBalance(new BigDecimal(454));
 			cust.setWallet(wallet);
 			try {
-				service.createAccount(cust);
+				assertNotNull(service.createAccount(cust));
 			} catch (WalletException e) {
 				// TODO Auto-generated catch block
 				assertEquals("The name should contain only alphabets,minimum of 2 and maximum of 12", e.getMessage());
@@ -88,7 +88,7 @@ public class WalletTest {
 	 }
 
 	 
-	 @Test
+	@Test
 	 public void checkWallet1CreateAccount() {
 			Customer cust = new Customer();
 			cust.setMobileNo("9004009009");
@@ -97,31 +97,31 @@ public class WalletTest {
 			wallet.setBalance(new BigDecimal(-1));
 			cust.setWallet(wallet);
 			try {
-				service.createAccount(cust);
+				assertNotNull(service.createAccount(cust));
 			} catch (WalletException e) {
 				// TODO Auto-generated catch block
 				assertEquals("The balance cannot be less than or zero", e.getMessage());
 			}
 		 
 	 }
-	 @Test
-	 public void checkWallet2CreateAccount() {
+	@Test(expected=WalletException.class)
+	 public void checkWallet2CreateAccount() throws WalletException {
 			Customer cust = new Customer();
 			cust.setMobileNo("9004009009");
 			cust.setName("shu");
 			Wallet wallet= new Wallet();
 			wallet.setBalance(new BigDecimal(0));
 			cust.setWallet(wallet);
-			try {
-				service.createAccount(cust);
-			} catch (WalletException e) {
+			//try {
+			assertNotNull(service.createAccount(cust));
+			//} catch (WalletException e) {
 				// TODO Auto-generated catch block
-				assertEquals("The balance cannot be less than or zero", e.getMessage());
-			}
+				//assertEquals("The balance cannot be less than or zero", e.getMessage());
+			//}
 	 }
 	 
 	 
-			 @Test
+	@Test
 			 public void validCreateAccount() {
 				 Customer cust = new Customer();
 					cust.setMobileNo("9008004004");
@@ -133,22 +133,23 @@ public class WalletTest {
 						assertNotNull(service.createAccount(cust));
 					} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
 	 }
 
 			 
-			 @Test
-			 public void phoneShowBal() {
+	@Test(expected=WalletException.class)
+			 public void phoneShowBal() throws WalletException {
 				String mobile="9585";
-					try {
+					//try {
 						assertNotNull(service.showBal(mobile));
-					} catch (WalletException e) {
+					//} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The mobile number must contain only 10 digits", e.getMessage());
-					}
+						
+						//assertEquals("The mobile number must contain only 10 digits", e.getMessage());
+					//}
 	 }
-			 @Test
+	@Test
 			 public void phoneEmptyShowBal() {
 				String mobile="";
 					try {
@@ -158,8 +159,8 @@ public class WalletTest {
 						assertEquals("The mobile number cannot be left empty.", e.getMessage());
 					}
 	 }
-			 @Test
-			 public void phoneNotExistShowBal() {
+	@Test
+			 public void phoneNotExistShowBal() throws WalletException {
 				String mobile="9008004004";
 					try {
 						assertNotNull(service.showBal(mobile));
@@ -176,7 +177,7 @@ public class WalletTest {
 						assertNotNull(service.showBal(mobile));
 					} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
 	 }
 			 @Test
@@ -190,16 +191,16 @@ public class WalletTest {
 						assertEquals("The mobile number must contain only 10 digits", e.getMessage());
 					}
 	 }	 
-			 @Test
-			 public void phoneEmptyDeposit() {
+			 @Test(expected=WalletException.class)
+			 public void phoneEmptyDeposit() throws WalletException {
 				 String mobile="";
 				 BigDecimal amt=new BigDecimal(23);
-					try {
+					//try {
 						assertNotNull(service.deposit(mobile, amt));
-					} catch (WalletException e) {
+					//} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The mobile number cannot be left empty.", e.getMessage());
-					}
+					//	assertEquals("The mobile number cannot be left empty.", e.getMessage());
+					//}
 	 }	 	 
 			 @Test
 			 public void phoneNotExistDeposit() {
@@ -212,17 +213,17 @@ public class WalletTest {
 						assertEquals("The entered mobile number does not exists.", e.getMessage());
 					}
 	 }
-			 @Test
-			 public void checkWallet1Deposit() {
+			 @Test(expected=WalletException.class)
+			 public void checkWallet1Deposit() throws WalletException {
 				 String mobileNo="9004009009";
 					BigDecimal d= new BigDecimal(-1);
 					
-					try {
+					//try {
 						service.deposit(mobileNo, d);
-					} catch (WalletException e) {
+					//} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The deposited amount must be greater than 0.", e.getMessage());
-					}
+						//assertEquals("The deposited amount must be greater than 0.", e.getMessage());
+					//}
 				 
 			 }
 			 @Test
@@ -238,34 +239,34 @@ public class WalletTest {
 					}
 			 }
 			 @Test
-			 public void validDeposit() {
+			 public void validDeposit()  {
 				String mobile="6457918002";
 				BigDecimal d= new BigDecimal(546);
 					try {
 						assertNotNull(service.deposit(mobile, d));
 					} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
 	 }
 			 
-			 @Test
-			 public void phone2FundTransfer() {
+			 @Test(expected=WalletException.class)
+			 public void phone2FundTransfer() throws WalletException {
 				 String mob2="9585";
 				 String mobile1="6457918002";
 				 BigDecimal amt=new BigDecimal(23);
-					try {
+					//try {
 						assertNotNull(service.fundTransfer(mobile1,mob2, amt));
-					} catch (WalletException e) {
+					//} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The mobile number must contain only 10 digits", e.getMessage());
-					}
+					//	assertEquals("The mobile number must contain only 10 digits", e.getMessage());
+					//}
 	 }	 
 			 @Test
 			 public void phoneEmpty2FundTransfer() {
 				 String mob2="";
 				 String mobile1="6457918002";
-				 BigDecimal amt=new BigDecimal(23);
+				 BigDecimal amt=new BigDecimal(3);
 					try {
 						assertNotNull(service.fundTransfer(mobile1,mob2, amt));
 					}catch (WalletException e) {
@@ -277,7 +278,7 @@ public class WalletTest {
 			 public void phoneNotExist2FundTranfer() {
 				String mob2="9008004004";
 				 BigDecimal amt=new BigDecimal(23);
-				 String mobile1="6457918002";
+				 String mobile1="6456918002";
 					try {
 						assertNotNull(service.fundTransfer(mobile1,mob2, amt));
 					} catch (WalletException e) {
@@ -286,29 +287,29 @@ public class WalletTest {
 					}
 	 }
 			 
-			 @Test
-			 public void phoneFundTransfer() {
+			 @Test(expected=WalletException.class)
+			 public void phoneFundTransfer() throws WalletException {
 				 String mobile1="9585";
 				 String mob2="6457918002";
 				 BigDecimal amt=new BigDecimal(23);
-					try {
+				//	try {
 						assertNotNull(service.fundTransfer(mobile1,mob2, amt));
-					} catch (WalletException e) {
+					//} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The mobile number must contain only 10 digits", e.getMessage());
-					}
+					//	assertEquals("The mobile number must contain only 10 digits", e.getMessage());
+					//}
 	 }	 
-			 @Test
-			 public void phoneEmptyFundTransfer() {
+			 @Test(expected=WalletException.class)
+			 public void phoneEmptyFundTransfer() throws WalletException {
 				 String mobile1="";
 				 String mob2="6457918002";
 				 BigDecimal amt=new BigDecimal(23);
-					try {
+				//	try {
 						assertNotNull(service.fundTransfer(mobile1,mob2, amt));
-					}catch (WalletException e) {
+					//}catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The mobile number cannot be left empty.", e.getMessage());
-					}
+					//	assertEquals("The mobile number cannot be left empty.", e.getMessage());
+					//}
 	 }	 	 
 			 @Test
 			 public void phoneNotExistFundTranfer() {
@@ -323,18 +324,18 @@ public class WalletTest {
 					}
 	 }
 			 
-			 @Test
-			 public void checkWallet1FundTransfer() {
+			 @Test(expected=WalletException.class)
+			 public void checkWallet1FundTransfer() throws WalletException {
 				 String mobile1="9008004004";
 				 String mob2="6457918002";
 					BigDecimal d= new BigDecimal(-1);
 					
-					try {
+				//	try {
 						assertNotNull(service.fundTransfer(mobile1,mob2, d));
-					} catch (WalletException e) {
+				//	} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The withdraw amount must be greater than 0.", e.getMessage());
-					}
+				//		assertEquals("The withdraw amount must be greater than 0.", e.getMessage());
+				//	}
 				 
 			 }
 			 @Test
@@ -370,34 +371,34 @@ public class WalletTest {
 				 String mob2="9008004004";
 				BigDecimal d= new BigDecimal(546);
 					try {
-						assertNotNull(service.fundTransfer(mobile1,mob2, d));
+						assertTrue(service.fundTransfer(mobile1,mob2, d));
 					} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
 	 }
 			 
-			 @Test
-			 public void phoneWithdraw() {
+			 @Test(expected=WalletException.class)
+			 public void phoneWithdraw() throws WalletException {
 				 String mobile="9585";
 				 BigDecimal amt=new BigDecimal(23);
-					try {
+					//try {
 						assertNotNull(service.withdraw(mobile, amt));
-					} catch (WalletException e) {
+					//} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The mobile number must contain only 10 digits", e.getMessage());
-					}
+						//assertEquals("The mobile number must contain only 10 digits", e.getMessage());
+				//	}
 	 }	 
-			 @Test
-			 public void phoneEmptyWithdraw() {
+			 @Test(expected=WalletException.class)
+			 public void phoneEmptyWithdraw() throws WalletException {
 				 String mobile="";
 				 BigDecimal amt=new BigDecimal(23);
-					try {
+					//try {
 						assertNotNull(service.withdraw(mobile, amt));
-					} catch (WalletException e) {
+					//} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The mobile number cannot be left empty.", e.getMessage());
-					}
+					//	assertEquals("The mobile number cannot be left empty.", e.getMessage());
+					//}
 	 }	 	 
 			 @Test
 			 public void phoneNotExistWithdraw() {
@@ -424,17 +425,17 @@ public class WalletTest {
 					}
 				 
 			 }
-			 @Test
-			 public void checkWallet2Withdraw() {
+			 @Test(expected=WalletException.class)
+			 public void checkWallet2Withdraw() throws WalletException {
 					String mobileNo="9004009009";
 					BigDecimal d= new BigDecimal(0);
 					
-					try {
+					//try {
 						service.withdraw(mobileNo, d);
-					} catch (WalletException e) {
+					//} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The withdraw amount must be greater than 0.", e.getMessage());
-					}
+					//	assertEquals("The withdraw amount must be greater than 0.", e.getMessage());
+					//}
 			 }
 			 
 			 @Test
@@ -457,18 +458,18 @@ public class WalletTest {
 						assertNotNull(service.withdraw(mobile, d));
 					} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
 	 }
-			 @Test
-			 public void phonePrintTransactions() {
+			 @Test(expected=WalletException.class)
+			 public void phonePrintTransactions() throws WalletException {
 				String mobile="9585";
-					try {
+					//try {
 						assertNotNull(service.printTransactionDetails(mobile));
-					} catch (WalletException e) {
+					//} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						assertEquals("The mobile number must contain only 10 digits", e.getMessage());
-					}
+					//	assertEquals("The mobile number must contain only 10 digits", e.getMessage());
+				//	}
 	 }
 			 @Test
 			 public void phoneEmptyPrintTransaction() {
@@ -481,7 +482,7 @@ public class WalletTest {
 					}
 	 }
 			 @Test
-			 public void phoneNotExistPrintTransaction() {
+			 public void phoneNotExistPrintTransaction() throws WalletException {
 				String mobile="9008004004";
 					try {
 						assertNotNull(service.printTransactionDetails(mobile));
@@ -491,6 +492,8 @@ public class WalletTest {
 					}
 	 }
 			 
+			
+			 
 			 @Test
 			 public void validPrintTransactions() {
 				String mobile="6457918002";
@@ -498,7 +501,7 @@ public class WalletTest {
 						assertNotNull(service.printTransactionDetails(mobile));
 					} catch (WalletException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
 	 } 
 			 
